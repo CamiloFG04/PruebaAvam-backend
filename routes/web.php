@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\DocDocumento;
+use App\Models\ProProceso;
+use App\Models\TipTipoDoc;
 use Illuminate\Support\Facades\Route;
 
 /*
