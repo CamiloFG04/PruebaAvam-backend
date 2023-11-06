@@ -29,7 +29,10 @@ class DocDocumentoController extends Controller
     public function index()
     {
         try {
-            $documentos = DocDocumento::with('tipo')->with('proceso')->get();
+            $documentos = DocDocumento::select('DOC_ID', 'DOC_NOMBRE', 'DOC_CODIGO', 'DOC_CONTENIDO', 'DOC_ID_TIPO', 'DOC_ID_PROCESO','TIP_NOMBRE','PRO_NOMBRE')
+            ->leftJoin('tip_tipo_docs', 'doc_documentos.DOC_ID_TIPO', '=', 'tip_tipo_docs.TIP_ID')
+            ->leftJoin('pro_procesos', 'doc_documentos.DOC_ID_PROCESO', '=', 'pro_procesos.PRO_ID')
+            ->get();
             $procesos = ProProceso::all();
             $tipos = TipTipoDoc::all();
 
@@ -59,6 +62,7 @@ class DocDocumentoController extends Controller
             }
 
             $docCode = DocCode::createCode($request->DOC_ID_PROCESO,$request->DOC_ID_TIPO);
+            // dd($docCode);
 
             $data = [];
             array_push($data,[
@@ -130,7 +134,7 @@ class DocDocumentoController extends Controller
     {
         try {
             DocDocumento::destroy($id);
-            $data = ['message' => 'Documento eliminado'];
+            $data = ['message' => 'Documento eliminado','DOC_ID'=>$id];
             return SuccessResponseJson::successResponse($data,200);
         } catch (\Throwable $th) {
             return ErrorResponseJson::errorResponse($th->getMessage(),500);

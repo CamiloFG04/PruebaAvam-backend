@@ -9,7 +9,8 @@ class DocCode {
     public static function createCode(string $id_proceso, string $id_tipo): string {
         try {
 
-            $UltimoDocumento = DocDocumento::latest('DOC_CODIGO')->first();
+            $UltimoDocumento = DocDocumento::latest()->first();
+            // return $UltimoDocumento;
             $proceso = ProProceso::find($id_proceso);
             $tipo = TipTipoDoc::find($id_tipo);
 
