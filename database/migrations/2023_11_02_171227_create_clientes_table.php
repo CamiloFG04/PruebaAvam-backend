@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tip_tipo_docs', function (Blueprint $table) {
-            $table->id('TIP_ID');
-            $table->string('TIP_NOMBRE');
-            $table->string('TIP_PREFIJO');
+        Schema::create('clientes', function (Blueprint $table) {
+            $table->id('cliente_id');
+            $table->string('nombre')->nullable();
+            $table->string('apellido')->nullable();
+            $table->string('direccion')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tip_tipo_docs');
+        Schema::dropIfExists('clientes');
     }
 };

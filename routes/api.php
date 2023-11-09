@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\DocDocumentoController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,11 +37,17 @@ Route::group([
 
 });
 
-Route::group(['middleware' => 'api','prefix' => 'documentos'], function () {
-    // Documentos
-    Route::get('/',[DocDocumentoController::class,'index'])->name('documentos');
-    Route::post('/create',[DocDocumentoController::class,'store'])->name('documentos_create');
-    Route::get('/{id}',[DocDocumentoController::class,'show'])->name('documentos');
-    Route::put('/update/{id}',[DocDocumentoController::class,'update'])->name('documentos_update');
-    Route::delete('/delete/{id}',[DocDocumentoController::class,'destroy'])->name('documentos_delete');
+Route::group(['middleware' => 'api','prefix' => 'store'], function () {
+    // clientes
+    Route::get('/clientes',[ClienteController::class,'index'])->name('clientes');
+
+    // productos
+    Route::get('/productos',[ProductoController::class,'index'])->name('prosuctos');
+
+    // cotizaciones
+    Route::get('/cotizaciones',[CotizacionController::class,'index'])->name('prosuctos');
+    Route::post('cotizacion/create',[CotizacionController::class,'store'])->name('cotizacion_create');
+    Route::get('cotizacion/{id}',[CotizacionController::class,'show'])->name('cotizacion');
+    Route::put('cotizacion/update/{id}',[CotizacionController::class,'update'])->name('cotizacion_update');
+    Route::delete('cotizacion/delete/{id}',[CotizacionController::class,'destroy'])->name('cotizacion_delete');
 });
