@@ -54,7 +54,7 @@ class CotizacionController extends Controller
             // dd($productos);
             $cotizacion = Cotizacion::create($data);
             foreach ($productos as $producto) {
-                $cotizacion->cotizacionProducto()->attach([$producto['id'] =>["cantidad"=>$producto['cantidad']]]);
+                $cotizacion->cotizacionProducto()->attach([$producto['producto'] =>["cantidad"=>$producto['cantidad']]]);
             }
 
             return SuccessResponseJson::successResponse($cotizacion,201);
